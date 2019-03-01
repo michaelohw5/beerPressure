@@ -44,15 +44,27 @@ router.post("/register", function (req, res) {
     var user = {
         email: req.body.email,
         password: req.body.password,
-        name: req.body.name
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        street: req.body.street,
+        city: req.body.city,
+        state: req.body.state,
+        zip: req.body.zip,
+        phone: req.body.phone,
     }
     var salt = helpers.getSalt();
 
     var userInstance = {
+        email: user.email,  
+        firstName: user.firstName,
+        lastName: user.lastName,
         salt: salt,
-        email: user.email,
         hash: helpers.getHash(salt, user.password),
-        name: user.name
+        street: user.street,
+        city: user.city,
+        state: user.state,
+        zip: user.zip,
+        phone: user.phone
     }
     console.log(userInstance.salt, userInstance.hash);
 
