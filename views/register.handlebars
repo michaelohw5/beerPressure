@@ -1,57 +1,72 @@
-<div class="row mt-5">
-    <div class="col-8 mx-auto">
-        <div class="card">
-            <h4 class="mx-auto">Register</h4>
+<div class="row m-3 m-sm-5">
+    <div class="col-sm-12 col-md-9 mx-auto">
+        <div class="card rounded-0">
+            <h4 class="mx-auto my-3">Register</h4>
         </div>
-        <div class="card p-3">
-        <form>
-            <div class="form-row">
-                <div class="form-group col-6">
-                    <label for="first_name">First Name</label>
-                    <input type="text" class="form-control" id="first_name" placeholder="Email">
-                </div>
-                <div class="form-group col-6">
-                    <label for="last_name">Last Name</label>
-                    <input type="text" class="form-control" id="last_name" placeholder="Password">
-                </div>
-               
-                    <div class="form-group col-6">
+        <div class="card p-3 rounded-0 border-top-0">
+            <form>
+                <div class="form-row">
+                    <div class="form-group col-12 col-sm-6">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" id="firstName" placeholder="First Name">
+                    </div>
+                    <div class="form-group col-12 col-sm-6">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control" id="last_name" placeholder="Last Name">
+                    </div>
+
+                    <div class="form-group col-12 col-sm-12">
                         <label for="email">Email</label>
                         <input type="email" class="form-control" id="email" placeholder="Email">
                     </div>
-                    <div class="form-group col-6">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Password">
+                    <div class="form-group col-12 col-sm-6">
+                        <label for="password1">Password</label>
+                        <input type="password" class="form-control" id="password1" placeholder="Password">
                     </div>
-                
-                <div class="form-group col-6">
-                    <label for="address">Address</label>
-                    <input type="text" class="form-control" id="address" placeholder="1234 Main St">
+                    <div class="form-group col-12 col-sm-6">
+                        <label for="password1">Re-Enter Password</label>
+                        <input type="password" class="form-control" id="password2" placeholder="Re-Enter Password">
+                    </div>
+
+                    <div class="form-group col-12 col-sm-12">
+                        <label for="address">Address</label>
+                        <input type="text" class="form-control" id="address" placeholder="1234 Main St">
+                    </div>
+                    <div class="form-group col-12 col-sm-12">
+                        <label for="address2">Address 2</label>
+                        <input type="text" class="form-control" id="address2" placeholder="Apartment, studio, or floor">
+                    </div>
+                    
+                        <div class="form-group col-12 col-sm-6">
+                            <label for="city">City</label>
+                            <input type="text" class="form-control" id="city" placeholder="City">
+                        </div>
+                        <div class="form-group col-12 col-sm-4">
+                            <label for="state">State</label>
+                            <select id="state" class="form-control">
+                                <option selected>Choose...</option>
+                                <option>Alabama</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-12 col-sm-2">
+                            <label for="zip">Zip</label>
+                            <input type="text" class="form-control" id="zip" placeholder="Zip Code">
+                        </div>
+                    
                 </div>
-                <div class="form-group col-6">
-                    <label for="address2">Address 2</label>
-                    <input type="text" class="form-control" id="address2"
-                        placeholder="Apartment, studio, or floor">
+                <div class="form-row">
+                    <button id="submit" type="submit" class="btn btn-primary btn-block my-3 mx-auto">Register</button>
                 </div>
-                <div class="form-row mx-auto">
-                    <div class="form-group col-6">
-                        <label for="city">City</label>
-                        <input type="text" class="form-control" id="city">
-                    </div>
-                    <div class="form-group col-4">
-                        <label for="state">State</label>
-                        <select id="state" class="form-control">
-                            <option selected>Choose...</option>
-                            <option>...</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-2">
-                        <label for="zip">Zip</label>
-                        <input type="text" class="form-control" id="zip">
-                    </div>
+                <div class="form-row">
+                    <p class="mx-auto">Already have an account?</p>
+                    
                 </div>
-                <button type="submit" class="btn btn-primary">Sign in</button>
-        </form>
+                <div class="form-row">
+                    <p class="mx-auto"><a href="http://localhost:3000/login"> Sign In Here</a></p>
+                </div>
+
+
+            </form>
+        </div>
     </div>
-</div>
 </div>
