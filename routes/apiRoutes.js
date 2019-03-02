@@ -8,14 +8,15 @@ var civicQuery = `https://www.googleapis.com/civicinfo/v2/representatives?key=${
 var address = `&address=1263%20Pacific%20Ave.%20Kansas%20City%20KS`
 var civicQueryURL = civicQuery + address;
 var user = require("../models/user.model.js");
+
 router.get("/api/users", function(req, res) {
-  user.findOne({ where: })
-  .then(function(result){
-    console.log(result)
-  })
-  .catch(function(err) {
-    if (err) throw err;
-  })
+  // user.findOne({  })
+  // .then(function(result){
+  //   console.log(result)
+  // })
+  // .catch(function(err) {
+  //   if (err) throw err;
+  // })
 })
 router.get("/civic", function (req, res) {
   request(civicQueryURL, function (err, response, body) {
