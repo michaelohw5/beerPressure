@@ -9,18 +9,77 @@
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul id="navlinks" class="navbar-nav">
+    
+    </ul>
+  </div>
+</nav>
   {{{body}}}
   <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 <script>
     $(document).ready(function() {
         var token = window.localStorage.getItem("token");
+        
+        var signInLink = `<li class="nav-item">
+                                <a class="nav-link" href="#">SignIn/Register</a>
+                            </li>`;
+
+        var profileLink = `<li class="nav-item">
+                                <a class="nav-link" href="#">Profile</a>
+                            </li>`;
+
+        var aboutLink = `<li class="nav-item">
+                                <a class="nav-link" href="#">About</a>
+                            </li>`;
+
+        var contactLink = `<li class="nav-item">
+                                <a class="nav-link" href="#">Contact</a>
+                            </li>`;
+
+        var signOutLink = `<li class="nav-item">
+                                <a class="nav-link" href="#">Log Out</a>
+                            </li>`;
+
+        var navLinks = document.querySelector('#navlinks');
+        
+        
         if(token) {
+
+            navLinks.innerHTML = '';
+            navLinks.innerHTML =  profileLink + aboutLink + contactLink + signOutLink;
+
             axios({
                 url: "/api/protect",
+                headers: {
+                    "Authorization": "Bearer " + token
+                }
+            })
+            .then(function(resp) {
+
+                console.log('response: '+resp);
+            })
+            .catch(function(err) {
+                console.error('error: '+err);
+            })
+            
+        } else {
+            navLinks.innerHTML = '';
+            navLinks.innerHTML =  signInLink + aboutLink + contactLink;
+        }
+        if(token){
+            axios({
+                url: "/api/profile",
                 headers: {
                     "Authorization": "Bearer " + token
                 }
@@ -32,6 +91,8 @@
                 console.error(err);
             })
         }
+        
+        
         $("#submit-login").on("click", function(e) {
           e.preventDefault();
             axios.post("/auth/login", {
@@ -40,8 +101,8 @@
             })
             .then(function(resp) {
                 console.log(resp)
-                window.localStorage.setItem("token", resp.data.token)
-                //window.location.assign("/login");
+                window.localStorage.setItem("token", resp.data.token);
+                window.location.assign("/");
             })
             .catch(function(err) {
                 console.error(err);
@@ -50,9 +111,16 @@
         $("#submit").on("click", function(e) {
             e.preventDefault();
             axios.post("/auth/register", {
+                firstName: $("#firstName").val(),
+                lastName: $("#email").val(),
+                address1: $("#address1").val(),
+                address2: $("#address2").val(),
+                city: $("#city").val(),
+                state: $("#state").val(),
+                zip: $("#zip").val(),
                 email: $("#email").val(),
-                password: $("#password").val(),
-                name: $("#name").val(),
+                password1: $("#password1").val(),
+                password2: $("#password2").val(),
             })
             .then(function(resp) {
                 console.log(resp)
