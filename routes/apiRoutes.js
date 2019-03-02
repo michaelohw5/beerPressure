@@ -1,15 +1,29 @@
 var db = require("../models");
 var express = require("express");
 var router = express.Router();
+var request = require("request");
 
-router.get("/protect", function(req, res) {
+var civicAPI = process.env.civicAPI;
+var civicQuery = `https://www.googleapis.com/civicinfo/v2/representatives?key=${civicAPI}`
+var address = `&address=1263%20Pacific%20Ave.%20Kansas%20City%20KS`
+var civicQueryURL = civicQuery + address;
+
+router.get("/civic", function (req, res) {
+  request(civicQueryURL, function (err, response, body) {
+    if (!err && response.statusCode === 200) {
+      console.log(JSON.parse(body));
+    }
+  });
+});
+
+router.get("/protect", function (req, res) {
   console.log("HELLO");
   res.json({
     message: "PROTECTED"
   });
 });
 
-router.get("/profile", function(req, res) {
+router.get("/profile", function (req, res) {
   res.render("profile");
 });
 
