@@ -11,7 +11,7 @@ var civicQueryURL = civicQuery + address;
 router.get("/civic", function (req, res) {
   request(civicQueryURL, function (err, response, body) {
     if (!err && response.statusCode === 200) {
-      console.log(JSON.parse(body));
+      return JSON.parse(body);
     }
   });
 });
