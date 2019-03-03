@@ -1,12 +1,13 @@
 var db = require("../models");
 var express = require("express");
+var request = require("request");
 var router = express.Router();
 
 //getting the API from google civic
 // GOOGLE CIVIC API
 var civicAPI = process.env.civicAPI;
-var civicQuery = `https://www.googleapis.com/civicinfo/v2/representatives?key=${civicAPI}`
-var address;
+var civicQuery = `https://www.googleapis.com/civicinfo/v2/representatives?key=${civicAPI}&address=`
+var address = "1263%20Pacific%20Ave.%20Kansas%20City%20KS";
 var civicQueryURL = civicQuery + address;
 
 router.get("/api/users", function (req, res) {
@@ -23,20 +24,50 @@ router.get("/api/users", function (req, res) {
       if (err) throw err;
     })
 })
-router.get("/civic", function (req, res) {
-  request(civicQueryURL, function (err, response, body) {
-    if (!err && response.statusCode === 200) {
+router.get("/api/civic", function (req, res) {
+  console.log("civic reached");
+  request(civicQueryURL, function (err, result, body) {
+    if (!err && result.statusCode === 200) {
       return JSON.parse(body);
     }
   });
-});
+}); // doesn't work yet
+
 // ====================================================================
 // PRO PUBLICA 
 // Upcoming Bills
 var publicaAPI = process.env.publicaAPI
+var publicaQuery = `https://api.propublica.org/congress/v1/bills/upcoming/` //+ {chamber}.json
+var houseOptions = {
+  url: `https://api.propublica.org/congress/v1/bills/upcoming/house.json`,
+  headers: {
+    'X-API-Key': publicaAPI
+  }
+}
+var senateOptions = {
+  url: publicaQuery+"senate.json",
+  headers: {
+    'X-API-Key': publicaAPI
+  }
+}
+// House Bills
+router.get("/api/house", function (req, res) {
+  request(houseOptions, function (err, result, body) {
+    if (!err && result.statusCode == 200) {
+      return JSON.parse(body);
+    }
+  })
+})
+// Senate Bills
+router.get("/api/senate", function (req, res) {
+  request(senateOptions, function (err, result, body) {
+    if (!err && result.statusCode == 200) {
+      return JSON.parse(body);
+    }
+  })
+})
 
-
-// ======================================================================
+// =====================================================================
 // Load index page
 router.get("/", function (req, res) {
   res.render("index");
