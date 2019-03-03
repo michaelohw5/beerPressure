@@ -3,6 +3,7 @@ var express = require("express");
 var router = express.Router();
 
 //getting the API from google civic
+// GOOGLE CIVIC API
 var civicAPI = process.env.civicAPI;
 var civicQuery = `https://www.googleapis.com/civicinfo/v2/representatives?key=${civicAPI}`
 var address;
@@ -29,7 +30,13 @@ router.get("/civic", function (req, res) {
     }
   });
 });
+// ====================================================================
+// PRO PUBLICA 
+// Upcoming Bills
+var publicaAPI = process.env.publicaAPI
 
+
+// ======================================================================
 // Load index page
 router.get("/", function (req, res) {
   res.render("index");
