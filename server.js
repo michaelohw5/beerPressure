@@ -10,24 +10,28 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
 var jwt = require('express-jwt');
+var cookieParser = require('cookie-parser');
+var verifyToken = require('./routes/helpers/verifyToken');
 
 // ROUTES
 var apiRoutes = require("./routes/apiRoutes");
 var htmlRoutes = require("./routes/htmlRoutes");
 var authRoutes = require("./routes/authRoutes");
+var protectedRoutes = require("./routes/protectedRoutes");
 var db = require("./models");
 // END REQUIRES ==================================
 
 var app = express();
 var PORT = process.env.PORT || 3000;
 
-const auth = jwt({
-  secret: process.env.JWT_SECRET,
-  userProperty: 'payload'
-});
+// const auth = jwt({
+//   secret: process.env.JWT_SECRET,
+//   userProperty: 'payload'
+// });
 // Middleware
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 app.use(express.static("public"));
 
 // Handlebars
@@ -42,8 +46,9 @@ app.set("view engine", "handlebars");
 // Routes
 app.use(htmlRoutes);
 app.use("/auth", authRoutes);
-app.use(auth);
+//app.use(auth);
 app.use("/api", apiRoutes);
+app.use(protectedRoutes);
 
 
 var syncOptions = { force: false };
@@ -59,7 +64,7 @@ app.get("*", function (req, res) {
   res.render("404");
 });
 // Starting the server, syncing our models ------------------------------------/
-db.sequelize.sync({ force:false }).then(function() {
+db.sequelize.sync({ force:true }).then(function() {
   app.listen(PORT, function() {
     console.log(
       "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",

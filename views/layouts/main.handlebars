@@ -2,136 +2,102 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/styles/styles.css" media="screen" title="no title" charset="utf-8">
-  <title>Home Page</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/styles.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <title>Home Page</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul id="navlinks" class="navbar-nav">
-    
-    </ul>
-  </div>
-</nav>
-  {{{body}}}
-  <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
-<script>
-    $(document).ready(function() {
-        var token = window.localStorage.getItem("token");
-        
-        var signInLink = `<li class="nav-item">
-                                <a class="nav-link" href="#">SignIn/Register</a>
-                            </li>`;
 
-        var profileLink = `<li class="nav-item">
-                                <a class="nav-link" href="#">Profile</a>
-                            </li>`;
+    {{{body}}}
 
-        var aboutLink = `<li class="nav-item">
-                                <a class="nav-link" href="#">About</a>
-                            </li>`;
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div id="modalHeader" class="modal-header">
+                    <h5 id="modalTitle" class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="modalBody" class="modal-body">
+                    <div id="loader">
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="modalFooter" class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        var contactLink = `<li class="nav-item">
-                                <a class="nav-link" href="#">Contact</a>
-                            </li>`;
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
 
-        var signOutLink = `<li class="nav-item">
-                                <a class="nav-link" href="#">Log Out</a>
-                            </li>`;
+    <script>
+        $(document).ready(function () {
+           
+            $("#submit-login").on("click", function (e) {
+                e.preventDefault();
+                axios.post("/auth/login", {
+                    email: $("#email").val(),
+                    password: $("#password").val(),
+                })
+                    .then(function (resp) {
+                        console.log(resp);
+                        $("#modalFooter").hide();
+                        var spin1 = `<div class="spinner-border text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                            </div>`;
+                        $("#modalBody").append(spin1);
+                        $("#modal").modal('show');
+                        setTimeout(function(){
+                            window.location.assign("/profile");
+                        },1500);
+                        //window.localStorage.setItem("token", resp.data.token);
+                        //window.location.assign("/");
+                    })
+                    .catch(function (err) {
+                        console.error(err);
+                    })
+            })
 
-        var navLinks = document.querySelector('#navlinks');
-        
-        
-        if(token) {
-
-            navLinks.innerHTML = '';
-            navLinks.innerHTML =  profileLink + aboutLink + contactLink + signOutLink;
-
-            axios({
-                url: "/api/protect",
-                headers: {
-                    "Authorization": "Bearer " + token
-                }
-            })
-            .then(function(resp) {
-
-                console.log('response: '+resp);
-            })
-            .catch(function(err) {
-                console.error('error: '+err);
-            })
-            
-        } else {
-            navLinks.innerHTML = '';
-            navLinks.innerHTML =  signInLink + aboutLink + contactLink;
-        }
-        if(token){
-            axios({
-                url: "/api/profile",
-                headers: {
-                    "Authorization": "Bearer " + token
-                }
-            })
-            .then(function(resp) {
-                console.log(resp)
-            })
-            .catch(function(err) {
-                console.error(err);
-            })
-        }
-        
-        
-        $("#submit-login").on("click", function(e) {
-          e.preventDefault();
-            axios.post("/auth/login", {
-                email: $("#email").val(),
-                password: $("#password").val(),
-            })
-            .then(function(resp) {
-                console.log(resp)
-                window.localStorage.setItem("token", resp.data.token);
-                window.location.assign("/");
-            })
-            .catch(function(err) {
-                console.error(err);
+            $("#submit").on("click", function (e) {
+                e.preventDefault();
+                axios.post("/auth/register", {
+                    firstName: $("#firstName").val(),
+                    lastName: $("#lastName").val(),
+                    address1: $("#address1").val(),
+                    address2: $("#address2").val(),
+                    city: $("#city").val(),
+                    state: $("#state").val(),
+                    zip: $("#zip").val(),
+                    email: $("#email").val(),
+                    password1: $("#password1").val(),
+                    password2: $("#password2").val(),
+                })
+                    .then(function (resp) {
+                        console.log(resp)
+                        window.location.assign("/login");
+                    })
+                    .catch(function (err) {
+                        console.error(err);
+                    })
             })
         })
-        $("#submit").on("click", function(e) {
-            e.preventDefault();
-            axios.post("/auth/register", {
-                firstName: $("#firstName").val(),
-                lastName: $("#email").val(),
-                address1: $("#address1").val(),
-                address2: $("#address2").val(),
-                city: $("#city").val(),
-                state: $("#state").val(),
-                zip: $("#zip").val(),
-                email: $("#email").val(),
-                password1: $("#password1").val(),
-                password2: $("#password2").val(),
-            })
-            .then(function(resp) {
-                console.log(resp)
-                window.location.assign("/login");
-            })
-            .catch(function(err) {
-                console.error(err);
-            })
-        })
-    })
-</script>
+    </script>
 </body>
 
 </html>
