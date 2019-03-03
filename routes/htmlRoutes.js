@@ -81,7 +81,7 @@ router.get("/datapage", function (req, res) {
 router.get("/login", function (req, res) {
   res.render("login");
 });
-router.get("/profile", function (req, res) {
-  res.render("profile");
-})
+// router.get("/profile", function (req, res) {
+//   res.render("profile");
+// })
 module.exports = router;
