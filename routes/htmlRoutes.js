@@ -60,7 +60,6 @@ console.log(senateOptions);
 router.get("/api/house", function (req, res) {
   request(houseOptions, function (err, result, body) {
     if (!err && result.statusCode == 200) {
-      
       // console.log(keys);
       // console.log(JSON.stringify(body));
       var parseBody = JSON.parse(body);
@@ -76,8 +75,12 @@ router.get("/api/house", function (req, res) {
 router.get("/api/senate", function (req, res) {
   request(senateOptions, function (err, result, body) {
     if (!err && result.statusCode == 200) {
-      console.log("body: " + body);
-      return JSON.parse(body.results[0].bills[0]);
+      var parseBody = JSON.parse(body);
+      var bills = parseBody.results[0].bills;
+      for (var i =0; i<bills.length; i++) {
+        console.log(`Chamber of Bill #${i+1} ${bills[i].description}`);
+      }
+      return res.json(parseBody.results[0].bills);
     }
   })
 })
