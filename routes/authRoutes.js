@@ -91,24 +91,24 @@ router.post("/register", function (req, res) {
 
     }
     function getpoliticians(userInstance, next) {
-        var baseURL = `https://www.googleapis.com/civicinfo/v2/representatives?key=${process.env.civicInfoAPIKey}`;
-        var formattedAddress = `&address=${userInstance.address1} ${userInstance.address2} ${userInstance.city} ${userInstance.state} ${userInstance.zip}`;
+        var baseURL = `https://www.googleapis.com/civicinfo/v2/representatives?key=${process.env.civicAPI}`;
+        var formattedAddress = `&address=1263%20Pacific%20Ave.%20Kansas%20City%20KS`//`&address=${userInstance.address1} ${userInstance.address2} ${userInstance.city} ${userInstance.state} ${userInstance.zip}`;
         var roles = `&roles=legislatorUpperBody&roles=legislatorLowerBody`
         var url = baseURL + formattedAddress + roles;
-        console.log(url);
-        console.log(formattedAddress);
+        // console.log(url);
+        // console.log(formattedAddress);
         request(url, function (error, response, body) {
-            console.log('error:', error); // Print the error if one occurred
-            console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-            console.log('body:', body); // Print the HTML for the Google homepage.
+            if (!error && response.statusCode == 200) {
+                console.log("body: " + body);
+            }
             // userInstance.senator1 = body.officials[0].name;
             // userInstance.senator2 = body.officials[1].name;
             // userInstance.ushouseRep = body.officials[2].name;
             
-            var data = Object.keys(body);
-            console.log(body);
+            // var data = Object.keys(body);
+            // console.log(body);
 
-            next(userInstance);
+            // next(userInstance);
         });
     }
     function createUser(userInstance){
