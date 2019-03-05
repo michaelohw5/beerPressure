@@ -24,10 +24,6 @@ var db = require("./models");
 var app = express();
 var PORT = process.env.PORT || 3000;
 
-// const auth = jwt({
-//   secret: process.env.JWT_SECRET,
-//   userProperty: 'payload'
-// });
 // Middleware
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
@@ -46,10 +42,8 @@ app.set("view engine", "handlebars");
 // Routes
 app.use(htmlRoutes);
 app.use("/auth", authRoutes);
-//app.use(auth);
 app.use("/api", apiRoutes);
 app.use(protectedRoutes);
-
 
 var syncOptions = { force: false };
 
