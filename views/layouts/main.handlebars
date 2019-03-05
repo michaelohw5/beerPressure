@@ -1,38 +1,55 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
+    {{!-- import bootsrtap CSS --}}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
+    {{!-- import custom CSS --}}
     <link rel="stylesheet" href="/styles/styles.css" media="screen" title="no title" charset="utf-8">
+    {{!-- import font awesome CSS --}}
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    
+    {{!-- import jQuery JS --}}
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-
+    {{!-- document title --}}
     <title>Home Page</title>
 </head>
 
 <body>
+    {{!-- start navbar --}}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        {{!-- navbar title --}}
+        <a class="navbar-brand" href="#">Navbar</a>
+        {{!-- responsive toggle --}}
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        {{!-- mobile responsive nav links --}}
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul id="navLinks" class=" ml-auto navbar-nav"></ul>
+        </div>
+    </nav>
+    {{!-- end navbar --}}
 
     {{{body}}}
 
+    {{!-- start modal --}}
     <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
+                {{!-- modal header --}}
                 <div id="modalHeader" class="modal-header">
-                    <h5 id="modalTitle" class="modal-title" id="exampleModalLabel"></h5>
+                    <h5 id="modalTitle" class="modal-title" id="modalLabel"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div id="modalBody" class="modal-body">
-                    <div id="loader">
-                        <div class="spinner-border" role="status">
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                    </div>
-                </div>
+                {{!-- modal body --}}
+                <div id="modalBody" class="modal-body px-auto"></div>
+                {{!-- modal footer --}}
                 <div id="modalFooter" class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary">Save changes</button>
@@ -40,42 +57,101 @@
             </div>
         </div>
     </div>
-
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+    {{!-- end modal --}}
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    {{!-- import axios --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
 
     <script>
         $(document).ready(function () {
-           
+            //parse cookies to get userId
+            function loggedIn() {
+                //declare append variable for scoping
+                var userId;
+                //get cookies
+                var cookieArray = document.cookie.split('; ');
+                //iterate through cookies
+                cookieArray.forEach(cookie => {
+                    //parse cookie into name and value
+                    var cookieName = cookie.split('=')[0];
+                    //find the userId cookie
+                    if (cookieName == 'user') {
+                        //append to userId variable
+                        userId = cookie.split('=')[1];
+                    }
+                });
+                //check userId validiity
+                if (userId > -1) {
+                    //if valid return userId
+                    return userId;
+                } else {
+                    //if no user cookie found infor user to login in
+                    console.log("cookies not found please log in again");
+                }
+            }
+            //define sign in link
+            var signInLink = `<li class="nav-item">
+                                <a class="nav-link" href="/login">Sign In / Register</a>
+                            </li>`;
+            //define about link
+            var aboutLink = `<li class="nav-item">
+                                <a class="nav-link" href="/about">About</a>
+                            </li>`;
+            //define pprofile link
+            var profileLink = `<li class="nav-item">
+                                <a class="nav-link" href="/profile">Profile</a>
+                            </li>`;
+            //define log out link
+            var logOutLink = `<li class="nav-item">
+                                <a class="nav-link" href="#">Sign Out</a>
+                            </li>`;
+            //set valid userId
+            var userId = loggedIn();
+            //check to see if the user is signed in
+            if(userId > -1){
+                //if user logged in append appropriate links to navbar
+                $("#navLinks").append(profileLink + aboutLink + logOutLink)
+            } else {
+                //if user not logged append appropriate links to navbar
+                $("#navLinks").append(aboutLink + signInLink)
+            }
+            //submit sign in form
             $("#submit-login").on("click", function (e) {
+                //prevent page refresh on form submit
                 e.preventDefault();
+                //post user login info to login auth route
                 axios.post("/auth/login", {
                     email: $("#email").val(),
                     password: $("#password").val(),
                 })
                     .then(function (resp) {
-                        console.log(resp);
+                        //hide modal footer
                         $("#modalFooter").hide();
-                        var spin1 = `<div class="spinner-border text-primary" role="status">
-                            <span class="sr-only">Loading...</span>
-                            </div>`;
+                        //change modal title
+                        $("#modalTitle").html("Loading");
+                        //mutate modal title 
+                        $("#modalTitle").addClass("ml-auto pl-3");
+                        //define loader animation
+                        var spin1 = `<div class="loader my-5 mx-auto"></div>`;
+                        //add loader animation to modal body
                         $("#modalBody").append(spin1);
+                        //show modal
                         $("#modal").modal('show');
-                        setTimeout(function(){
+                        //wait 1.5 seconds then redirect to profile page
+                        setTimeout(function () {
                             window.location.assign("/profile");
-                        },1500);
-                        //window.localStorage.setItem("token", resp.data.token);
-                        //window.location.assign("/");
+                        }, 1500);
                     })
                     .catch(function (err) {
+                        // log errors to the console
                         console.error(err);
-                    })
+                    });
             })
-
+            //submit register form
             $("#submit").on("click", function (e) {
+                //prevent page refresh on form submit
                 e.preventDefault();
+                 //post user info to registers auth route
                 axios.post("/auth/register", {
                     firstName: $("#firstName").val(),
                     lastName: $("#lastName").val(),
@@ -89,12 +165,13 @@
                     password2: $("#password2").val(),
                 })
                     .then(function (resp) {
-                        console.log(resp)
+                        //redirect to the login page if registration successful
                         window.location.assign("/login");
                     })
                     .catch(function (err) {
+                        //log any errors to the console
                         console.error(err);
-                    })
+                    });
             })
         })
     </script>
