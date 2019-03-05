@@ -24,7 +24,10 @@ router.get("/profile", verifyToken, function(req, res) {
       "address2",
       "city",
       "state",
-      "zip"
+      "zip",
+      "senator1",
+      "senator2",
+      "usRepresentative"
     ]
   })
     .then(function(resp) {
