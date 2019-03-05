@@ -100,7 +100,43 @@ router.post("/register", function(req, res) {
       });
   }
 
-  createUser(userInstance);
+    }
+    function getpoliticians(userInstance, next) {
+        var baseURL = `https://www.googleapis.com/civicinfo/v2/representatives?key=${process.env.civicAPI}`;
+        var formattedAddress = `&address=1263%20Pacific%20Ave.%20Kansas%20City%20KS`//`&address=${userInstance.address1} ${userInstance.address2} ${userInstance.city} ${userInstance.state} ${userInstance.zip}`;
+        var roles = `&roles=legislatorUpperBody&roles=legislatorLowerBody`
+        var url = baseURL + formattedAddress + roles;
+        // console.log(url);
+        // console.log(formattedAddress);
+        request(url, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log("body: " + body);
+            }
+            // userInstance.senator1 = body.officials[0].name;
+            // userInstance.senator2 = body.officials[1].name;
+            // userInstance.ushouseRep = body.officials[2].name;
+            
+            // var data = Object.keys(body);
+            // console.log(body);
+
+            // next(userInstance);
+        });
+    }
+    function createUser(userInstance){
+        console.log(userInstance.salt, userInstance.hash);
+
+        models.User.create(userInstance)
+            .then(function (resp) {
+                res.json({ message: "Creation Sucess!", id: resp.id })
+            })
+            .catch(function (err) {
+                routeHelpers.sendJsonError(res, err);
+            })
+    }
+createUser(userInstance);
+    //getpoliticians(userInstance, createUser);
+    
+
 });
 
 module.exports = router;

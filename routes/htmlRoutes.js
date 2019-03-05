@@ -31,7 +31,7 @@ router.get("/api/civic", function (req, res) {
       return JSON.parse(body);
     }
   });
-}); // doesn't work yet
+}); // works like a charm
 
 // ====================================================================
 // PRO PUBLICA 
@@ -97,9 +97,29 @@ router.get("/api/senate", function (req, res) {
         return res.json(parsed.results[0].bills);
       }
     }
-  })
-})
+  });
+});
 
+// =====================================================================
+// GET REPRESENTATIVES
+var baseURL = `https://www.googleapis.com/civicinfo/v2/representatives?key=${process.env.civicAPI}`;
+var formattedAddress = `&address=1263%20Pacific%20Ave.%20Kansas%20City%20KS`//`&address=${userInstance.address1}%20${userInstance.city}%20${userInstance.state}%20${userInstance.zip}`;
+var roles = `&roles=legislatorUpperBody&roles=legislatorLowerBody`
+var repUrl = baseURL + formattedAddress + roles;
+router.get("/api/reps", function (req, res) {
+  request(repUrl, function (err, result, body) {
+    if (!err && result.statusCode == 200) {
+      var parsebody = JSON.parse(body);
+      var reps = parsebody.officials
+      var repsArray = [];
+      for (var i = 0; i<reps.length; i++) {
+        repsArray.push(reps[i]);
+      }
+      console.log(repsArray);
+      return res.json(repsArray);
+    }
+  })
+});
 // =====================================================================
 // Load index page
 router.get("/", function (req, res) {
