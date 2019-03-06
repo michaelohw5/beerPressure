@@ -168,6 +168,7 @@
                     password2: $("#password2").val().trim(),
                 })
                     .then(function (resp) {
+                        console.log(resp);
                         //redirect to the login page if registration successful
                         window.location.assign("/login");
                     })

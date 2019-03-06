@@ -5,7 +5,7 @@ var express = require("express");
 var router = express.Router();
 var verifyToken = require("./helpers/verifyToken");
 //logout route
-router.post("/logout", verifyToken, function(req, res) {
+router.post("/logout", function(req, res) {
   res.clearCookie("token");
 });
 //profile route
