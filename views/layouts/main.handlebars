@@ -106,7 +106,7 @@
                             </li>`;
             //define log out link
             var logOutLink = `<li class="nav-item">
-                                <a class="nav-link" href="/logout">Sign Out</a>
+                                <a id="signOut" class="nav-link" href="#">Sign Out</a>
                             </li>`;
             //set valid userId
             var userId = loggedIn();
@@ -175,6 +175,10 @@
                         //log any errors to the console
                         console.error(err);
                     });
+            })
+            $("#signOut").click(function(e){
+                //e.preventDefault();
+                axios.post("/logout");
             })
         })
     </script>
