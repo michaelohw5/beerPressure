@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     {{!-- import bootsrtap CSS --}}
@@ -9,7 +10,7 @@
     {{!-- import font awesome CSS --}}
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    
+
     {{!-- import jQuery JS --}}
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -58,7 +59,9 @@
         </div>
     </div>
     {{!-- end modal --}}
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
     {{!-- import axios --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
 
@@ -108,7 +111,7 @@
             //set valid userId
             var userId = loggedIn();
             //check to see if the user is signed in
-            if(userId > -1){
+            if (userId > -1) {
                 //if user logged in append appropriate links to navbar
                 $("#navLinks").append(profileLink + aboutLink + logOutLink)
             } else {
@@ -151,18 +154,18 @@
             $("#submit").on("click", function (e) {
                 //prevent page refresh on form submit
                 e.preventDefault();
-                 //post user info to registers auth route
+                //post user info to registers auth route
                 axios.post("/auth/register", {
-                    firstName: $("#firstName").val(),
-                    lastName: $("#lastName").val(),
-                    address1: $("#address1").val(),
-                    address2: $("#address2").val(),
-                    city: $("#city").val(),
-                    state: $("#state").val(),
-                    zip: $("#zip").val(),
-                    email: $("#email").val(),
-                    password1: $("#password1").val(),
-                    password2: $("#password2").val(),
+                    firstName: $("#firstName").val().trim(),
+                    lastName: $("#lastName").val().trim(),
+                    address1: $("#address1").val().trim(),
+                    address2: $("#address2").val().trim(),
+                    city: $("#city").val().trim(),
+                    state: $("#state").val().trim(),
+                    zip: $("#zip").val().trim(),
+                    email: $("#email").val().trim(),
+                    password1: $("#password1").val().trim(),
+                    password2: $("#password2").val().trim(),
                 })
                     .then(function (resp) {
                         //redirect to the login page if registration successful
