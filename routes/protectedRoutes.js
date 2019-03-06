@@ -9,7 +9,7 @@ router.post("/logout", verifyToken, function(req, res) {
   res.clearCookie("token");
 });
 //profile route
-router.get("/profile", verifyToken, function(req, res) {
+router.get("/profile", verifyToken, function (req, res) {
   //get use
   db.User.findOne({
     where: {
@@ -30,20 +30,20 @@ router.get("/profile", verifyToken, function(req, res) {
       "usRepresentative"
     ]
   })
-    .then(function(resp) {
+    .then(function (resp) {
       //parse response
       var data = resp.dataValues;
       //render profile template
       res.render("profile", data);
     })
-    .catch(function(err) {
+    .catch(function (err) {
       //log error to console
       console.log(err);
     });
 });
 //getting the API from google civic
 // GOOGLE CIVIC API
-var civicAPI = process.env.civicAPI;
+var civicAPI = process.env.civicInfoAPIKey;
 var civicQuery = `https://www.googleapis.com/civicinfo/v2/representatives?key=${civicAPI}&address=`
 var address = "1263%20Pacific%20Ave.%20Kansas%20City%20KS";
 var civicQueryURL = civicQuery + address;
@@ -150,7 +150,7 @@ router.get("/api/reps", function (req, res) {
       var parsebody = JSON.parse(body);
       var reps = parsebody.officials
       var repsArray = [];
-      for (var i = 0; i<reps.length; i++) {
+      for (var i = 0; i < reps.length; i++) {
         repsArray.push(reps[i]);
       }
       console.log(repsArray);
