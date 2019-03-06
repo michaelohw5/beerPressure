@@ -23,18 +23,18 @@
             <div class="row">
                 <div class="col-12 col-sm-4 pr-sm-0">
                     <div class="card rounded-0">
-                        <div id="senator1"></div>
+                        {{senator1}}
                     </div>
                     
                 </div>
                 <div class="col-12 col-sm-4 p-sm-0">
                     <div class="card rounded-0">
-                        <div id="senator2"></div>
+                        {{senator2}}
                     </div>
                 </div>
                 <div class="col-12 col-sm-4 pl-sm-0">
                     <div class="card rounded-0">
-                        <div id="usRepresentative"></div>
+                        {{usRepresentative}}
                     </div>
                 </div>
             </div>
@@ -145,22 +145,6 @@
     
     var userId = loggedIn();
     console.log(userId);
-
-    $.get(`/api/users/${userId}`, function (data) {
-        console.log(data);
-        var baseURL = `https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyAyd0njJHxlMvLQPBtkW1cm9BoOsjM2XYg`;
-        var formattedAddress = `&address=${data.address1} ${data.address2} ${data.city} ${data.state} ${data.zip}`;
-        var roles = `&roles=legislatorUpperBody&roles=legislatorLowerBody`
-        var url = baseURL + formattedAddress + roles;
-        $.get(url, function (data) {
-            console.log(data.officials);
-
-            $("#senator1").append(data.officials[0].name);
-            $("#senator2").append(data.officials[1].name);
-            $("#usRepresentative").append(data.officials[2].name);
-
-        });
-    });
 
     $("#saveChanges").click(function (e) {
         e.preventDefault();
