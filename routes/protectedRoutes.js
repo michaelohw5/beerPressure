@@ -14,7 +14,7 @@ router.get("/profile", verifyToken, function (req, res) {
   //get use
   db.User.findOne({
     where: {
-      id: req.cookies.user
+      id: req.userId
     }, //limit returned fields to omit salt and hash
     attributes: [
       "id",

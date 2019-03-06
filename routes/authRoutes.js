@@ -43,7 +43,6 @@ router.post("/login", function (req, res) {
                 //send authorization and user info cookies
                 res
                     .cookie("token", token)
-                    .cookie("user", currentUser)
                     .status(200)
                     .send("cookie set");
             } else {
