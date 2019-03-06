@@ -3,6 +3,7 @@ require("dotenv").config();
 var db = require("../models");
 var express = require("express");
 var router = express.Router();
+var request = require("request");
 var verifyToken = require("./helpers/verifyToken");
 //logout route
 router.post("/logout", verifyToken, function(req, res) {
@@ -48,7 +49,7 @@ var civicQuery = `https://www.googleapis.com/civicinfo/v2/representatives?key=${
 var address = "1263%20Pacific%20Ave.%20Kansas%20City%20KS";
 var civicQueryURL = civicQuery + address;
 
-router.get("/api/users", function (req, res) {
+router.get("/users", function (req, res) {
   db.User.findOne({ where: { id: 1 } })
     .then(function (result) {
       var tempAddress = result.address1 + " " + result.city + " " + result.state;
@@ -140,7 +141,7 @@ router.get("/api/senate", function (req, res) {
 
 // =====================================================================
 // GET REPRESENTATIVES
-var baseURL = `https://www.googleapis.com/civicinfo/v2/representatives?key=${process.env.civicAPI}`;
+var baseURL = `https://www.googleapis.com/civicinfo/v2/representatives?key=${civicAPI}`;
 var formattedAddress = `&address=1263%20Pacific%20Ave.%20Kansas%20City%20KS`//`&address=${userInstance.address1}%20${userInstance.city}%20${userInstance.state}%20${userInstance.zip}`;
 var roles = `&roles=legislatorUpperBody&roles=legislatorLowerBody`
 var repUrl = baseURL + formattedAddress + roles;

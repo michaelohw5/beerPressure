@@ -155,26 +155,34 @@
                 //prevent page refresh on form submit
                 e.preventDefault();
                 //post user info to registers auth route
-                axios.post("/auth/register", {
-                    firstName: $("#firstName").val().trim(),
-                    lastName: $("#lastName").val().trim(),
-                    address1: $("#address1").val().trim(),
-                    address2: $("#address2").val().trim(),
-                    city: $("#city").val().trim(),
-                    state: $("#state").val().trim(),
-                    zip: $("#zip").val().trim(),
-                    email: $("#email").val().trim(),
-                    password1: $("#password1").val().trim(),
-                    password2: $("#password2").val().trim(),
-                })
-                    .then(function (resp) {
-                        //redirect to the login page if registration successful
-                        window.location.assign("/login");
+                var p1 = $("#password1").val();
+                var p2 = $("#password2").val();
+                if (p1 === p2) {
+                    axios.post("/auth/register", {
+                        firstName: $("#firstName").val().trim(),
+                        lastName: $("#lastName").val().trim(),
+                        address1: $("#address1").val().trim(),
+                        address2: $("#address2").val().trim(),
+                        city: $("#city").val().trim(),
+                        state: $("#state").val().trim(),
+                        zip: $("#zip").val().trim(),
+                        email: $("#email").val().trim(),
+                        password1: $("#password1").val().trim(),
+                        password2: $("#password2").val().trim(),
                     })
-                    .catch(function (err) {
-                        //log any errors to the console
-                        console.error(err);
-                    });
+                        .then(function (resp) {
+                            //redirect to the login page if registration successful
+                            window.location.assign("/login");
+                        })
+                        .catch(function (err) {
+                            //log any errors to the console
+                            console.error(err);
+                        });
+                } else {
+                    alert("both passwords needs to match");
+                    $("#password1").val("");
+                    $("#password2").val("");
+                }
             })
             $("#signOut").click(function(e){
                 //e.preventDefault();
