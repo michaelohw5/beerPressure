@@ -25,7 +25,7 @@
                     <div class="card rounded-0">
                         {{senator1}}
                     </div>
-                    
+
                 </div>
                 <div class="col-12 col-sm-4 p-sm-0">
                     <div class="card rounded-0">
@@ -49,74 +49,74 @@
         <div class="card p-3 rounded-0 border-0">
             <div class="row">
                 <div class="col-12">
-                    <button id="editProfile" class="btn btn-block btn-primary" type="button" data-toggle="collapse" data-target="#editInfo"
-                        aria-expanded="false" aria-controls="editInfo">
+                    <button id="editProfile" class="btn btn-block btn-primary" type="button" data-toggle="collapse"
+                        data-target="#editInfo" aria-expanded="false" aria-controls="editInfo">
                         Edit Profile
                     </button>
                 </div>
             </div>
         </div>
         <div id="editInfo" class="collapse">
-        <div  class="card p-3 rounded-0 ">
-            <div class="row">
-                <div class="col-12">
-                    <form>
-                        <fieldset id="userInfo" disabled>
-                            <div class="form-row">
-                                <div class="form-group col-12 col-sm-6">
-                                    <label for="firstName">First Name</label>
-                                    <input type="text" class="form-control" id="firstName" value="{{firstName}}">
+            <div class="card p-3 rounded-0 ">
+                <div class="row">
+                    <div class="col-12">
+                        <form>
+                            <fieldset id="userInfo" disabled>
+                                <div class="form-row">
+                                    <div class="form-group col-12 col-sm-6">
+                                        <label for="firstName">First Name</label>
+                                        <input type="text" class="form-control" id="firstName" value="{{firstName}}">
+                                    </div>
+                                    <div class="form-group col-12 col-sm-6">
+                                        <label for="lastName">Last Name</label>
+                                        <input type="text" class="form-control" id="last_name" value="{{lastName}}">
+                                    </div>
+                                    <div class="form-group col-12 col-sm-12">
+                                        <label for="email">Email</label>
+                                        <input type="email" class="form-control" id="email" value="{{email}}">
+                                    </div>
+                                    <div class="form-group col-12 col-sm-6">
+                                        <label for="password1">Password</label>
+                                        <input type="password" class="form-control" id="password1" value="Password">
+                                    </div>
+                                    <div class="form-group col-12 col-sm-6">
+                                        <label for="password1">Re-Enter Password</label>
+                                        <input type="password" class="form-control" id="password2" value="Password">
+                                    </div>
+                                    <div class="form-group col-12 col-sm-12">
+                                        <label for="address">Address</label>
+                                        <input type="text" class="form-control" id="address" value="{{address1}}">
+                                    </div>
+                                    <div class="form-group col-12 col-sm-12">
+                                        <label for="address2">Address 2</label>
+                                        <input type="text" class="form-control" id="{{address2}}" value="{{address2}}">
+                                    </div>
+                                    <div class="form-group col-12 col-sm-6">
+                                        <label for="city">City</label>
+                                        <input type="text" class="form-control" id="city" value="{{city}}">
+                                    </div>
+                                    <div class="form-group col-12 col-sm-4">
+                                        <label for="state">State</label>
+                                        <select id="state" class="form-control" value="{{state}}">
+                                            <option selected>Choose...</option>
+                                            <option>Alabama</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-12 col-sm-2">
+                                        <label for="zip">Zip</label>
+                                        <input type="text" class="form-control" id="zip" value="{{zip}}">
+                                    </div>
                                 </div>
-                                <div class="form-group col-12 col-sm-6">
-                                    <label for="lastName">Last Name</label>
-                                    <input type="text" class="form-control" id="last_name" value="{{lastName}}">
+                                <div class="form-row">
+                                    <button id="saveChanges" type="submit" style="display: none;"
+                                        class="btn btn-primary btn-block my-3 mx-auto">Save Changes</button>
                                 </div>
-                                <div class="form-group col-12 col-sm-12">
-                                    <label for="email">Email</label>
-                                    <input type="email" class="form-control" id="email" value="{{email}}">
-                                </div>
-                                <div class="form-group col-12 col-sm-6">
-                                    <label for="password1">Password</label>
-                                    <input type="password" class="form-control" id="password1" value="Password">
-                                </div>
-                                <div class="form-group col-12 col-sm-6">
-                                    <label for="password1">Re-Enter Password</label>
-                                    <input type="password" class="form-control" id="password2" value="Password">
-                                </div>
-                                <div class="form-group col-12 col-sm-12">
-                                    <label for="address">Address</label>
-                                    <input type="text" class="form-control" id="address" value="{{address1}}">
-                                </div>
-                                <div class="form-group col-12 col-sm-12">
-                                    <label for="address2">Address 2</label>
-                                    <input type="text" class="form-control" id="{{address2}}" value="{{address2}}">
-                                </div>
-                                <div class="form-group col-12 col-sm-6">
-                                    <label for="city">City</label>
-                                    <input type="text" class="form-control" id="city" value="{{city}}">
-                                </div>
-                                <div class="form-group col-12 col-sm-4">
-                                    <label for="state">State</label>
-                                    <select id="state" class="form-control" value="{{state}}">
-                                        <option selected>Choose...</option>
-                                        <option>Alabama</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-12 col-sm-2">
-                                    <label for="zip">Zip</label>
-                                    <input type="text" class="form-control" id="zip" value="{{zip}}">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <button id="saveChanges" type="submit" style="display: none;"
-                                    class="btn btn-primary btn-block my-3 mx-auto">Save Changes</button>
-                            </div>
-                        </fieldset>
-                    </form>
+                            </fieldset>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-</div>
 
 
 
@@ -125,24 +125,24 @@
 
 <script>
 
-    function loggedIn(){
+    function loggedIn() {
         var userId;
         var cookieArray = document.cookie.split('; ');
         console.log(cookieArray);
-        cookieArray.forEach( cookie => {
+        cookieArray.forEach(cookie => {
             var cookieName = cookie.split('=')[0];
             console.log(cookieName);
-            if(cookieName == 'user'){
-                userId =  cookie.split('=')[1];   
-            }  
+            if (cookieName == 'user') {
+                userId = cookie.split('=')[1];
+            }
         });
-        if(userId !== undefined || userId !== null){
+        if (userId !== undefined || userId !== null) {
             return userId;
         } else {
             console.log("cookies not found please log in again");
         }
     }
-    
+
     var userId = loggedIn();
     console.log(userId);
 
@@ -177,4 +177,5 @@
         console.log(disabled);
 
     });
+
 </script>

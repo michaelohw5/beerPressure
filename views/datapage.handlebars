@@ -6,3 +6,21 @@
         </div>
     </div>
 </div>
+
+<script>
+    function getHouseBills() {
+        var houseBills = [];
+        $.ajax({
+            url: "api/house",
+            method: "GET"
+        }).then(function (response) {
+            for (var i = 0; i < response.length; i++) {
+                houseBills.push(response[i]);
+            }
+            for (var j = 0; j < houseBills.length; j++) {
+                console.log(houseBills[j]);
+            }
+            return houseBills;
+        })
+    }
+</script>
