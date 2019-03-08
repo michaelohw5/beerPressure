@@ -51,18 +51,11 @@ body, html {
 	text-transform: uppercase;
 	text-shadow: 0 2px white, 0 3px #777;
 }
-.background-datapage {
-  background-image: url("../images/War_George.jpg");
-  background-size: 100%;
-  height: 100%;
-}
+
 .background-error {
-  background-image: url("../images/Egale_with_glasses.jpg");
+  background-image: url("../images/Bald-egale.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
   background-size: cover;
-  height: 100%;
-}
-.background-example {
-  background-image: url("../images/Congress.jpg");
-  background-size: cover;
-  height: 100%;
+  height: 85%;
 }
