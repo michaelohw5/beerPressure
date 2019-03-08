@@ -1,6 +1,33 @@
 .list-group-item {
   line-height: 2.5;
 }
+<<<<<<< HEAD
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid red;
+  border-right: 16px solid white;
+  border-bottom: 16px solid blue;
+ 
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+=======
 .loader {
   border: 16px solid #f3f3f3;
   border-radius: 50%;
@@ -11,6 +38,7 @@
   animation: spin 2s linear infinite;
 }
 
+>>>>>>> 589222296771dc7db1fe94e2bb3385f7be8a19dc
 /* Safari */
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }
@@ -20,4 +48,19 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+<<<<<<< HEAD
+}
+
+/*images*/
+.background-image {
+  background-image: url("https://static.cargurus.com/images/site/2017/06/09/11/02/old_glory_motors-pic-5285268369454408401-1600x1200.jpeg");
+  background-attachment: fixed;
+  background-color: transparent;
+}
+.background-image-404 {
+  background-image: url("https://teeshirtpalace-production.s3.amazonaws.com/spree/images/MEUSA526-BLACK-POST/large/MEUSA526-BLACK-POST.jpg?1513209868");
+  background-attachment: fixed;
+  background-color: transparent;
+=======
+>>>>>>> 589222296771dc7db1fe94e2bb3385f7be8a19dc
 }
