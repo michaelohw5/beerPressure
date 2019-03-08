@@ -1,6 +1,7 @@
 .list-group-item {
   line-height: 2.5;
 }
+<<<<<<< HEAD
 
 .loader {
   border: 16px solid #f3f3f3;
@@ -26,6 +27,18 @@
 }
 
 
+=======
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+>>>>>>> 589222296771dc7db1fe94e2bb3385f7be8a19dc
 /* Safari */
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }
@@ -35,6 +48,7 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+<<<<<<< HEAD
 }
 
 /*images*/
@@ -47,4 +61,6 @@
   background-image: url("https://teeshirtpalace-production.s3.amazonaws.com/spree/images/MEUSA526-BLACK-POST/large/MEUSA526-BLACK-POST.jpg?1513209868");
   background-attachment: fixed;
   background-color: transparent;
+=======
+>>>>>>> 589222296771dc7db1fe94e2bb3385f7be8a19dc
 }

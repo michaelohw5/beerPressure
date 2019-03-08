@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <div class="background-image-datapage">
+=======
+<div class="background-image">
+>>>>>>> 589222296771dc7db1fe94e2bb3385f7be8a19dc
     <div>
         wow great.
         <div id="user-info">
@@ -6,3 +10,21 @@
         </div>
     </div>
 </div>
+
+<script>
+    function getHouseBills() {
+        var houseBills = [];
+        $.ajax({
+            url: "api/house",
+            method: "GET"
+        }).then(function (response) {
+            for (var i = 0; i < response.length; i++) {
+                houseBills.push(response[i]);
+            }
+            for (var j = 0; j < houseBills.length; j++) {
+                console.log(houseBills[j]);
+            }
+            return houseBills;
+        })
+    }
+</script>
