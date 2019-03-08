@@ -19,12 +19,35 @@
             method: "GET"
         }).then(function (response) {
             for (var i = 0; i < response.length; i++) {
+                console.log(response[i]);
                 houseBills.push(response[i]);
-            }
-            for (var j = 0; j < houseBills.length; j++) {
-                console.log(houseBills[j]);
+
             }
             return houseBills;
         })
+            .catch(function (err) {
+                if (err) throw err;
+            })
     }
+
+    function getSenateBills() {
+        var senateBills = [];
+        $.ajax({
+            url: "api/senate",
+            method: "GET"
+        }).then(function (response) {
+            for (var i = 0; i < response.length; i++) {
+                senateBills.push(response[i]);
+                console.log(senateBills[i]);
+            }
+            console.log(`senatebills: ${senateBills}`);
+            return senateBills;
+        })
+            .catch(function (err) {
+                if (err) throw err;
+            })
+    }
+
+    getHouseBills();
+    getSenateBills();
 </script>

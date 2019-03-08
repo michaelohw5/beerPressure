@@ -102,15 +102,15 @@ router.get("/api/house", function (req, res) {
       var parseBody = JSON.parse(body);
       var bills = parseBody.results[0].bills;
       if (bills === undefined) {
-        console.log("no bills");
+        console.log("house: no bills");
         return res.json({
           "bills": "No Upcoming Bills",
         })
       }
       else {
-        for (var i = 0; i < bills.length; i++) {
-          console.log(`Chamber of Bill #${i + 1} ${bills[i].description}`);
-        }
+        // for (var i = 0; i < bills.length; i++) {
+        //   // console.log(`Chamber of Bill #${i + 1} ${bills[i].description}`);
+        // }
         return res.json(parseBody.results[0].bills);
       }
     }
@@ -120,19 +120,19 @@ router.get("/api/house", function (req, res) {
 router.get("/api/senate", function (req, res) {
   request(senateOptions, function (err, result, body) {
     if (!err && result.statusCode == 200) {
-      console.log(body);
+      // console.log(body);
       var parsed = JSON.parse(body);
       var bills = parsed.results[0].bills;
       if (bills === undefined) {
-        console.log("no bills");
+        console.log("senate: no bills");
         return res.json({
           "bills": "No Upcoming Bills",
         })
       }
       else {
-        for (var i = 0; i < bills.length; i++) {
-          console.log(`Chamber of Bill #${i + 1} ${bills[i].description}`);
-        }
+        // for (var i = 0; i < bills.length; i++) {
+        //   console.log(`Chamber of Bill #${i + 1} ${bills[i].description}`);
+        // }
         return res.json(parsed.results[0].bills);
       }
     }
