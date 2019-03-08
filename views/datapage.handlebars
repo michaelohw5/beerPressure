@@ -1,7 +1,7 @@
 <div class="background-image">
     <div class="container">
         <div class="jumbotron" id="cards">
-            <img src="/images/congress.jpg" height="150px" width="100%">
+            <img src="/images/congress.png" width="100%">
             {{!-- <img src="https://www.rti.org/sites/default/files/styles/rti_banner_1250/public/page-hero-images/istock_000026946270_us_capitol_flag_2500.jpg?itok=J5Rt5egN" height="150px" width="100%"> --}}
         </div>
     </div>
@@ -20,9 +20,9 @@
             <div class="card" id=card${i}>
                 <div class="card-body">
                     <h4 class="card-title">Bill Number: ${bill.bill_number}</h4>
-                    <p class="card-text">Chamber: ${bill.chamber}</p>
+                    <p class="card-text">Chamber: ${bill.chamber.toUpperCase()}</p>
                     <p class="card-text">Description: ${bill.description}</p>
-                    <a href="${bill.bill_url}" class="btn btn-primary">View PDF</a>
+                    <a href="${bill.bill_url}" class="btn btn-primary">View PDF </a>
                 </div>
             </div>`
                 if (bill.chamber !== undefined) {
@@ -46,7 +46,7 @@
             <div class="card" id=card${i}>
                 <div class="card-body">
                     <h4 class="card-title">Bill Number: ${bill.bill_number}</h4>
-                    <p class="card-text">Chamber: ${bill.chamber}</p>
+                    <p class="card-text">Chamber: ${bill.chamber.toUpperCase()}</p>
                     <p class="card-text">Description: ${bill.description}</p>
                     <a href="${bill.bill_url}" class="btn btn-primary">View PDF</a>
                 </div>
