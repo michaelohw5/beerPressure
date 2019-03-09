@@ -184,6 +184,15 @@ var senateOptions = {
     'X-API-Key': publicaAPI
   }
 }
+var recentOptions = {
+  url: "https://api.propublica.org/congress/v1/115/house/bills/introduced.json",
+  method: "GET",
+  headers: {
+    "X-API-Key": publicaAPI,
+    "Content-type": "application/json",
+    json: true
+  }
+}
 console.log(houseOptions);
 console.log(senateOptions);
 // House Bills
@@ -230,6 +239,17 @@ router.get("/api/senate", function (req, res) {
   });
 });
 
+// recent bills
+router.get("/api/recent", function(req, res) {
+  request(recentOptions, function (err, result, body) {
+    if (!err && result.statusCode == 200) {
+      console.log("recent bill running");
+      var parsed = JSON.parse(body);
+      var data = parsed.results[0].bills;
+      return res.json(data);
+    }
+  })
+})
 // =====================================================================
 // GET REPRESENTATIVES
 var baseURL = `https://www.googleapis.com/civicinfo/v2/representatives?key=${civicAPI}`;
