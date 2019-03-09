@@ -72,6 +72,19 @@ body, html {
   
 }
 
+.billNum {
+  color: white;
+  background-color: darkred;
+
+}
+
+.card-title {
+  background-color: navy;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+
 .background-error {
   background-image: url("../images/Bald-egale.jpg");
   background-position: center;
