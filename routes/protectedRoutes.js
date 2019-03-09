@@ -4,6 +4,7 @@ var db = require("../models");
 var express = require("express");
 var router = express.Router();
 var request = require("request");
+var axios = require("axios");
 var verifyToken = require("./helpers/verifyToken");
 //logout route
 router.post("/logout", function(req, res) {
@@ -11,6 +12,15 @@ router.post("/logout", function(req, res) {
 });
 //profile route
 router.get("/profile", verifyToken, function (req, res) {
+  function party(party){
+    if(party === "D"){
+      return "democrat"
+    } else if(party === "R"){
+      return "republican"
+    } else if(party === "I") {
+      return "info"
+    } 
+  }
   //get use
   db.User.findOne({
     where: {
