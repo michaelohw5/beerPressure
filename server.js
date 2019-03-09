@@ -57,6 +57,7 @@ if (process.env.NODE_ENV === "test") {
 app.get("*", function (req, res) {
   res.render("404");
 });
+
 // Starting the server, syncing our models ------------------------------------/
 db.sequelize.sync({ force:false }).then(function() {
   app.listen(PORT, function() {

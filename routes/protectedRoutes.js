@@ -38,19 +38,100 @@ router.get("/profile", verifyToken, function (req, res) {
       "zip",
       "senator1",
       "senator2",
-      "usRepresentative"
+      "usRepresentative",
+      "congressionalDistrict"
     ]
   })
-    .then(function (resp) {
-      //parse response
-      var data = resp.dataValues;
-      //render profile template
-      res.render("profile", data);
-    })
-    .catch(function (err) {
-      //log error to console
-      console.log(err);
+  .then(function (resp) {
+    //parse response
+    var data = resp.dataValues;
+    console.log(data.state);
+    //get contact forms
+    var houseurl = `https://api.propublica.org/congress/v1/members/house/${data.state}/${data.congressionalDistrict}/current.json`;
+    var senateurl = `https://api.propublica.org/congress/v1/members/senate/${data.state}/current.json`;
+    var config = {headers : {
+      "X-API-Key": publicaAPI,
+    }
+  }
+  axios.get(senateurl, config)
+  .then(function(resp){
+    //console.log(resp.data);
+    var senators = resp.data.results;
+    var senator1 = {
+      id: senators[0].id,
+      name: senators[0].name,
+      lastName: senators[0].last_name,
+      party: senators[0].party,
+      api_uri: senators[0].api_uri,
+      url: senators[0].url,
+      contact_form: senators[0].contact_form,
+      icon: party(senators[0].party)
+    };
+    var senator2 = {
+      id: senators[1].id,
+      name: senators[1].name,
+      lastName: senators[1].last_name,
+      party: senators[1].party,
+      api_uri: senators[1].api_uri,
+      url: senators[1].url,
+      contact_form: senators[1].contact_form,
+      icon: party(senators[1].party)
+    };
+    
+    data.senator1 = senator1;
+    data.senator2 = senator2;
+    axios.get(houseurl, config)
+    .then(function(resp){
+      //console.log(resp.data);
+      var rep = resp.data.results;
+      //console.log(rep);
+      var houseRep = {
+        id: rep[0].id,
+        name: rep[0].name,
+        lastName: rep[0].last_name,
+        party: rep[0].party,
+        api_uri: rep[0].api_uri,
+        url: rep[0].url,
+        contact_form: rep[0].contact_form,
+        icon: party(rep[0].party)
+      }; 
+    data.houseRep = houseRep;
+    console.log(data);
+    var senator1url= data.senator2.api_uri;
+    var senator1url= data.senator2.api_uri;
+    var houseRepurl= data.houseRep.api_uri;
+
+      axios(senator1url, config)
+      .then(function(resp){
+        //console.log(resp.data.url);
+      }).catch(function(err){
+        if(err) throw err;
+      });
+
+    res.render("profile", data);
+    }).catch(function(err){
+      if(err) throw err;
     });
+    
+  }).catch(function(err){
+    if(err) throw err;
+  });
+          
+  })
+  .catch(function (err) {
+    //log error to console
+    console.log(err);
+  });
+    // .then(function (resp) {
+    //   //parse response
+    //   var data = resp.dataValues;
+    //   //render profile template
+    //   //res.render("profile", data);
+    // })
+    // .catch(function (err) {
+    //   //log error to console
+    //   console.log(err);
+    // });
 });
 //getting the API from google civic
 // GOOGLE CIVIC API

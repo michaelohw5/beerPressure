@@ -1,4 +1,4 @@
-<div class="jumbotron">
+<div class="card">
     <div class="row m-3 m-sm-5">
         <div class="col-sm-12 col-md-9 mx-auto">
             <div class="card rounded-0">
@@ -20,26 +20,60 @@
                     </div>
                 </div>
             </div>
-            <div class="card rounded-0">
-                <div class="row">
-                    <div class="col-12 col-sm-4 pr-sm-0">
-                        <div class="card rounded-0">
-                            {{senator1}}
-                        </div>
 
-                    </div>
-                    <div class="col-12 col-sm-4 p-sm-0">
-                        <div class="card rounded-0">
-                            {{senator2}}
+
+                    <div class="card rounded-0">
+            <div class="row">
+                <div class="col-12 col-sm-4 pr-sm-0">
+                    <div class="card rounded-0 p-2 ">
+                        <div class="card-title text-center">
+                            <p>Senator {{senator1.name}}</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12"><p>Party: </p></div>
+                                <div class="col-12"><p>{{senator1.icon}}</p></div>
+                                <div class="col-12"><i class="mx-auto fas fa-{{senator1.icon}} fa-3x"></i></div>
+                                <div class="col-12"><p><a href="https://{{senator1.lastName}}.senate.gov/">Connect</a></p></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-12 col-sm-4 pl-sm-0">
-                        <div class="card rounded-0">
-                            {{usRepresentative}}
+
+                </div>
+                <div class="col-12 col-sm-4 p-sm-0">
+                    <div class="card rounded-0 p-2 d-flex ">
+                        <div class="card-title text-center border-bottom">
+                            <p>Senator {{senator2.name}}</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12"><p>Party:</p></div>
+                                <div class="col-12"><p>{{senator2.icon}}</p></div>
+                                <div class="col-12"><i class="mx-auto fas fa-{{senator2.icon}} fa-3x"></i></div>
+                                <div class="col-12"><p><a href="https://{{senator2.lastName}}.senate.gov/">Connect</a></p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-4 pl-sm-0">
+                    <div class="card rounded-0 p-2 d-flex ">
+                        <div class="card-title text-center">
+                            <p>Representative {{houseRep.name}}</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12"><p>Party: </p></div>
+                                <div class="col-12"><p>{{senator2.icon}}</p></div>
+                                <div class="col-12"><i class="mx-auto fas fa-{{houseRep.icon}} fa-3x"></i></div>
+                                <div class="col-12"><p><a href="https://{{houseRep.lastName}}.senate.gov/">Connect</a></p></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+
+
         </div>
     </div>
 
