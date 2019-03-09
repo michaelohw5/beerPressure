@@ -38,14 +38,18 @@
   <div class="row" align="center">
 
     {{#each house}}
+
     <div class="col-12 col-sm-4 col-md-3 mb-2">
       <div class="card rounded-0 p-2" style="height:100%">
         <strong class="mt-4 mb-0">
           <p>{{billNum}}</p>
         </strong>
         <hr/>
+
         <p>{{description}}</p>
-        <p><a href="{{bill_url}}">Read Bill Here</a></p>
+        <div class="card-footer readBill mt-auto">
+          <p><a href="{{bill_url}}">Read Bill Here</a></p>
+        </div>
       </div>
     </div>
     {{/each}}
