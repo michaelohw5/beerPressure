@@ -1,50 +1,57 @@
-<div class="row">
-  <div class="col-12">
-    <div class="card rounded-0 border-0" >
-      <div class="card-body p-0 my-2">
-        <div id="carouselExampleControls" class="carousel slide carousel-fade bg-secondary" data-ride="carousel " style="height: 250px;">
-          <div class="carousel-inner">
-            <div class="carousel-item active text-center">
-              <h3>Find Your Representatives</h3>
-              <p>Sway is your new way to comunicate with your current representatives about bills and issues that are importaint and upcoming based off your residentcy. Have an impact now by letting your reps know just how you feel about upcoming bills up for vote and Sway them to your side!</p>
+<div class="card offset-md-1" id="indexJumbo">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card rounded-0 border-0">
+        <div class="card-body p-0 my-2">
+          <div id="carouselExampleControls" class="carousel slide carousel-fade bg-secondary" data-ride="carousel "
+            style="height: 250px;">
+            <div class="carousel-inner">
+              <div class="carousel-item active text-center">
+                <h3>Find Your Representatives</h3>
+                <p>Sway is your new way to comunicate with your current representatives about bills and issues that are
+                  importaint and upcoming based off your residentcy. Have an impact now by letting your reps know just
+                  how you feel about upcoming bills up for vote and Sway them to your side!</p>
+              </div>
+              <div class="carousel-item text-center">
+                <h3>Contact Them</h3>
+              </div>
+              <div class="carousel-item">
+
+                <button class="btn btn-danger register">Register</button>
+
+
+              </div>
             </div>
-            <div class="carousel-item text-center">
-              <h3>Contact Them</h3>
-            </div>
-            <div class="carousel-item">
-              
-                <button  class="btn btn-danger register">Register</button>
-             
-              
-            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
           </div>
-          <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
         </div>
       </div>
     </div>
   </div>
-</div>
-<div class="row">
+  <div class="row" align="center">
 
-  {{#each house}}
-  <div class="col-12 col-sm-4 col-md-3">
-    <div class="card rounded-0 mb-2 p-2">
-      <p>{{billNum}}</p>
-      <p>{{description}}</p>
-      <p><a href="{{bill_url}}">Read Bill Here</a></p>
-      
-    </div>
-  </div>
-  {{/each}}
-</div>
+    {{#each house}}
+    <div class="col-12 col-sm-4 col-md-2 mb-2">
+      <div class="card rounded-0 p-2" style="height:100%">
+        <strong class="mt-4 mb-0">
+          <p>{{billNum}}</p>
+        </strong>
+        <hr/>
+        <p>{{description}}</p>
+        <p><a href="{{bill_url}}">Read Bill Here</a></p>
       </div>
+    </div>
+    {{/each}}
+  </div>
+</div>
+
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>

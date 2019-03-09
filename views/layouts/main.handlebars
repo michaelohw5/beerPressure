@@ -34,7 +34,6 @@
         </div>
     </nav>
     {{!-- end navbar --}}
-
     {{{body}}}
 
     {{!-- start modal --}}
@@ -72,11 +71,11 @@
             var signInLink = `<li class="nav-item">
                                 <a class="nav-link" href="/login">Sign In / Register</a>
                             </li>`;
-            //define about link
-            var aboutLink = `<li class="nav-item">
-                                <a class="nav-link" href="/about">About</a>
+            //define Bills link
+            var billsLink = `<li class="nav-item">
+                                <a class="nav-link" href="/datapage">Bills</a>
                             </li>`;
-            //define pprofile link
+            //define profile link
             var profileLink = `<li class="nav-item">
                                 <a class="nav-link" href="/profile">Profile</a>
                             </li>`;
@@ -89,10 +88,10 @@
             //check to see if the user is signed in
             if (document.cookie.split("=")[0] === 'token') {
                 //if user logged in append appropriate links to navbar
-                $("#navLinks").append(profileLink + aboutLink + logOutLink)
+                $("#navLinks").append(profileLink + billsLink + logOutLink)
             } else {
                 //if user not logged append appropriate links to navbar
-                $("#navLinks").append(aboutLink + signInLink)
+                $("#navLinks").append(billsLink + signInLink)
             }
             
 
