@@ -110,7 +110,13 @@ router.post("/register", function (req, res) {
                 //console.log("body: " + body);
             }
             var data = JSON.parse(body);
-            //console.log(data.officials);
+            console.log(url);
+            console.log(data.divisions);
+            var divisions = Object.keys(data.divisions);
+            var district = divisions[1].split(":")[divisions.length-1];
+            
+            userInstance.congressionalDistrict = district;
+            
             userInstance.senator1 = data.officials[0].name;
             userInstance.senator2 = data.officials[1].name;
             userInstance.usRepresentative = data.officials[2].name;

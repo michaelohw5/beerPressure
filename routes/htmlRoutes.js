@@ -26,7 +26,8 @@ router.get("/", function (req, res) {
 
       //console.log(resp.data.results[0].bills);
       var billsArr = resp.data.results[0].bills;
-      billsArr.forEach(bill => {
+      
+      billsArr.slice(-6).forEach(bill => {
         var houseBills = {
           billId: bill.bill_id,
           billNum: bill.bill_number,
@@ -46,7 +47,7 @@ router.get("/", function (req, res) {
             //bills.house.push({descrition: "No Bills currently up for vote"});
           
           } else {
-            billsArr.forEach(bill => {
+            billsArr.slice(-6).forEach(bill => {
               var senateBills = {
                 billId: bill.bill_id,
                 billNum: bill.bill_number,
