@@ -23,11 +23,26 @@
             <button class="btn btn-danger float-right delete">ｘ</button>
           </li>
           {{/each}}
+          
         </ul>
-      </div>
+        
     </div>
   </div>
 </div>
+<div class="row">
+
+  {{#each house}}
+  <div class="col-12 col-sm-4 col-md-3">
+    <div class="card rounded-0 mb-2 p-2">
+      <p>{{billNum}}</p>
+      <p>{{description}}</p>
+      <p><a href="{{bill_url}}">Read Bill Here</a></p>
+      
+    </div>
+  </div>
+  {{/each}}
+</div>
+      </div>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
