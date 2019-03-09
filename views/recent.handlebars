@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="jumbotron" id="recentcards">
+        <img src="/images/congress.png" width="100%">
+        {{!-- <img src="https://www.rti.org/sites/default/files/styles/rti_banner_1250/public/page-hero-images/istock_000026946270_us_capitol_flag_2500.jpg?itok=J5Rt5egN" height="150px" width="100%"> --}}
+    </div>
+
+</div>
+
+
+
+<script>
+    function getRecentBills() {
+        $.ajax({
+            url: "api/recent",
+            method: "GET"
+        }).then(function (response) {
+            console.log(".then hitting");
+            $.each(response, function (i, bill) {
+                console.log("wooooorking");
+                var cardTemplate = `
+            <div class="card" id=card${i}>
+                <div class="card-body">
+                    <h4 class="card-title">${bill.short_title}</h4>
+                    <p class="card-text">Bill Number: ${bill.number}</p>
+                    <p class="card-text">Sponser Party: ${bill.sponsor_title}</p>
+                    <p class="card-text">Committee: ${bill.committees}</p>
+                    <p class="card-text">Last Action Date: ${bill.latest_major_action_date}</p>
+                    <p class="card-text">Last Action: ${bill.latest_major_action}</p>
+                    <a href="${bill.gpo_pdf_uri}" class="btn btn-primary">View PDF </a>
+                </div>
+            </div>`
+                $("#recentcards").append(cardTemplate);
+            })
+        })
+            .catch(function (err) {
+                if (err) throw err;
+            })
+    }
+
+    getRecentBills();
+</script>

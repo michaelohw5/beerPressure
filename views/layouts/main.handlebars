@@ -71,9 +71,13 @@
             var signInLink = `<li class="nav-item">
                                 <a class="nav-link" href="/login">Sign In / Register</a>
                             </li>`;
-            //define Bills link
+            //define upcoming bills link
             var billsLink = `<li class="nav-item">
-                                <a class="nav-link" href="/datapage">Bills</a>
+                                <a class="nav-link" href="/datapage">Upcoming</a>
+                            </li>`;
+            //define recent bills link
+            var recentLink = `<li class="nav-item">
+                                <a class="nav-link" href="/recent">Recent</a>
                             </li>`;
             //define profile link
             var profileLink = `<li class="nav-item">
@@ -88,10 +92,10 @@
             //check to see if the user is signed in
             if (document.cookie.split("=")[0] === 'token') {
                 //if user logged in append appropriate links to navbar
-                $("#navLinks").append(profileLink + billsLink + logOutLink)
+                $("#navLinks").append(profileLink + billsLink + recentLink + logOutLink)
             } else {
                 //if user not logged append appropriate links to navbar
-                $("#navLinks").append(billsLink + signInLink)
+                $("#navLinks").append(billsLink + recentLink + signInLink)
             }
             
 

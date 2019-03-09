@@ -76,6 +76,9 @@ router.get("/register", function (req, res) {
 router.get("/datapage", function (req, res) {
   res.render("datapage");
 });
+router.get("/recent", function (req, res) {
+  res.render("recent");
+})
 router.get("/login", function (req, res) {
   res.render("login");
 });
